@@ -35,6 +35,9 @@ function App() {
       <div className="relative z-50 pt-20">
         <Navbar />
         <Routes>
+        {/* <Route path="/" element={!user?<LoginPage/>:<HomePage />} /> */}
+        <Route path='/' element={<HomePage />} />
+
           <Route path="/" element={!user?<LoginPage/>:<HomePage />} />
           <Route
             path="/signup"

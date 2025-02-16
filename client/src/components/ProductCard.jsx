@@ -5,15 +5,16 @@ import { useUserStore } from "../stores/useUserStore";
 import React from "react";
 
 const ProductCard = ({ product }) => {
+  const { user } = useUserStore();
   const handleAddToCart = () => {
-    // if (!user) {
-    // 	toast.error("Please login to add products to cart", { id: "login" });
-    // 	return;
-    // } else {
-    // 	// add to cart
-    // 	addToCart(product);
-    // }
-    toast.success("Product added to cart");
+    if (!user) {
+      toast.error("Please login to add products to cart", { id: "login" });
+      return;
+    } else {
+      // add to cart
+      // addToCart(product);
+    }
+    // toast.success("Product added to cart");
   };
 
   return (
@@ -28,7 +29,6 @@ const ProductCard = ({ product }) => {
         />
 
         {/* <div className="absolute inset-0 bg-black bg-opacity-20" /> */}
-
       </div>
 
       <div className="mt-4 px-5 pb-5">
