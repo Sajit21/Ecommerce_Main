@@ -3,21 +3,32 @@ import HomePage from "./pages/HomePage";
 import SIgnUpPage from "./pages/SIgnUpPage";
 import { LoginPage } from "./pages/LoginPage";
 import Navbar from "./components/Navbar";
+import CartPage from "./pages/CartPage";
 import AdminPage from "./pages/AdminPage";
+import CategoryPage from "./pages/CategoryPage";
 // import { LogOut } from "./pages/LogOut";
 import { Toaster } from "react-hot-toast";
 import { useUserStore } from "./stores/useUserStore";
 import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
+// import { Cat } from "lucide-react";
+import { useCartStore } from "./stores/useCartStore";
+import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
 
 // import { LogOut } from "lucide-react";
 
 function App() {
   const { user,checkAuth,checkingAuth } = useUserStore();
-  console.log(checkingAuth)
+  const {getCartItems}=useCartStore()
   useEffect(() => {
      checkAuth();
   }, [checkAuth]);
+  useEffect(() => {
+    if(!user)
+    return ;
+  getCartItems();
+
+  },[getCartItems])
 
   if(checkingAuth){
     return <LoadingSpinner />}
@@ -33,6 +44,9 @@ function App() {
       <div className="relative z-50 pt-20">
         <Navbar />
         <Routes>
+        {/* <Route path="/" element={!user?<LoginPage/>:<HomePage />} /> */}
+        <Route path='/' element={<HomePage />} />
+
           <Route path="/" element={!user?<LoginPage/>:<HomePage />} />
           <Route
             path="/signup"
@@ -47,7 +61,15 @@ function App() {
 						path='/secret-dashboard'
 						element={user?.role === "admin" ? <AdminPage /> : <Navigate to='/login' />}
 					/>
+          <Route
+						path='/category/:category'
+						element={ <CategoryPage />}
+					/>
+          <Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />
+          <Route path='/purchase-success' element={user ? <PurchaseSuccessPage /> : <Navigate to='/login' />} />
+
         </Routes>
+        
       </div>
       <Toaster />
     </div>

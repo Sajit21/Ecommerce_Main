@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import CategoryItem from "../components/CategoryItem";
+import { useCartStore } from "../stores/useCartStore";
 
 const categories = [
 	{ href: "/Chair", name: "Chair", imageUrl: "/Chair.png" },
@@ -12,10 +14,10 @@ const categories = [
 
 const HomePage = () => {
 	// const { fetchFeaturedProducts, products, isLoading } = useProductStore();
-
-	// useEffect(() => {
-	// 	fetchFeaturedProducts();
-	// }, [fetchFeaturedProducts]);
+       const {getCartItems}=useCartStore()
+	useEffect(() => {
+		getCartItems()
+	}, [getCartItems]);
 
 	return (
 		<div className='relative min-h-screen text-white overflow-hidden'>

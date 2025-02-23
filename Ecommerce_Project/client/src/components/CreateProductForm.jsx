@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { PlusCircle, Upload, Loader } from "lucide-react";
 
 // import { useProductStore } from "../stores/useProductStore";
-import { useProductStore } from "../stores/userProductStore";
+import { useProductStore } from "../stores/useProductStore";
 
 const categories = ["Chair", "cpu", "Headphone", "keyboard", "Laptop", "Mouse"];
 

@@ -61,6 +61,7 @@ export const useUserStore = create((set) => ({
       set({user:null})
       
     } catch (error) {
+      console.log('error in logout',error)
       toast.error(error.response?.data?.message || "An error occurred")
       
     }
@@ -71,7 +72,6 @@ export const useUserStore = create((set) => ({
     set({ checkingAuth:true });
     try{
       const res = await axiosInstance.get("/auth/profile")
-      console.log('hello from nepal',res.data)
       set({user:res.data, checkingAuth:false})
     }
     catch(error){
